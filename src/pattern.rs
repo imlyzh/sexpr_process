@@ -68,7 +68,11 @@ impl Pattern {
     pub fn from(ast: &GAst) -> Result<Self, BadSyntax> {
         let r = match ast {
             GAst::Const(c) => match c {
-                Constant::Sym(name) => Pattern::Capture(name.clone()),
+                Constant::Sym(name) => if *name.0 == "_" {
+                    Pattern::Ignore
+                } else {
+                    Pattern::Capture(name.clone())
+                },
                 _ => Pattern::Const(c.clone())
             },
             GAst::List(s) => {
