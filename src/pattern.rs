@@ -28,7 +28,7 @@ impl ListPattern {
                     let r = r
                     .get_const().ok_or_else(|| BadSyntax(ast.clone()))?
                     .get_sym().ok_or_else(|| BadSyntax(ast.clone()))?;
-                    if *r.0 == "" {
+                    if *r.0 == "..." {
                         return Err(BadSyntax(ast.clone()));
                     }
                 }
