@@ -10,6 +10,21 @@ pub enum Capture {
     Many(Vec<GAst>)
 }
 
+impl Capture {
+    pub fn get_one(&self) -> Option<&GAst> {
+        match self {
+            Capture::One(ref one) => Some(one),
+            _ => None
+        }
+    }
+    pub fn get_many(&self) -> Option<&Vec<GAst>> {
+        match self {
+            Capture::Many(ref one) => Some(one),
+            _ => None
+        }
+    }
+}
+
 pub type CaptureBind = (Handle<Symbol>, Capture);
 
 pub type CaptureBindList = Vec<CaptureBind>;
